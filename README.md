@@ -6,4 +6,4 @@ Conociendo la dirección de correo y el algoritmo de ofuscación, este programa 
 Esta práctica es la primera y está realizada para la asignatura Estructura de Datos y Algoritmos, impartida por Cesar Vaca en la UVa.
 Elaborado por: 
 - Javier @Helguera
-- Álvaro Velasco (@Velastroll).
+- Álvaro Velasco (@Velastroll)
