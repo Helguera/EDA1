@@ -3,11 +3,11 @@ import java.io.*;
 import java.util.Scanner;
 /**
  * @author alvvela - javhelg
- * @version 1.10.16 Oficial Primera Entrega
+ * @version Aqui se realizaran las modificaciones que serviran de base para la practica 2.
  * @info Las pruebas deben estar guardadas donde se genere el .class;
  *			
  */
-public class eda1 {
+public class eda1_examen {
 
 	public static void main(String[] args) {
 		String fichero_usuario=("");
