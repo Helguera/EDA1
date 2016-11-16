@@ -1,5 +1,3 @@
-package EDA1;
-
 import java.time.*;
 import java.io.*;
 import java.util.Scanner;
@@ -11,7 +9,7 @@ import java.util.Scanner;
  * @info Las pruebas deben estar guardadas donde se genere el .class;
  * 
  */
-public class eda1_examen {
+public class eda1ex {
 
 	public static int vPR[] = { 65, 54, 19, 98, 168, 33, 110, 187, 244, 22, 204, 4, 127, 100, 232, 93, 30, 242, 203, 42,
 			116, 197, 94, 53, 210, 149, 71, 158, 150, 45, 154, 136, 76, 125, 132, 63, 219, 172, 49, 182, 72, 95, 246,
