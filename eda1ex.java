@@ -119,9 +119,12 @@ public class eda1ex {
 					cont_evil = 0;
 				} // Si no son iguales, la variable que recorre el texto buscado vuelve al inicio
 				if (cont_evil == longitud_evil - 1) {
-					System.out.println("\nla clave es " + (clave - longitud_evil-1) + "\n");
 					
-					int clave_inicio = ((clave+65536) - i - 1)%65536;
+					int inicio_vector = i - longitud_evil+1;
+
+					System.out.println("\n\n\n La posicion " + (inicio_vector) + "\n\n\n");
+
+					int clave_inicio = ((clave+65536) - inicio_vector-1)%65536; /////////////////aqui
 					fichero_cifrado = ofuscar(vector_fichero, clave_inicio, vPS, vPI, vPR, longitud_fich);
 					
 					for (int j = -100; j < 501; j++) {
