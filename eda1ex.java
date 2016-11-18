@@ -70,7 +70,7 @@ public class eda1ex {
 		String evil_str = "evil.corp@mad.org"; // evil_vector contiene el
 												// texto que deseamos buscar
 		int vector_fichero[] = new int[longitud_fich]; // Vector vacio del tamano del fichero
-		int fichero_cifrado[] = new int[longitud_fich]; // Vector vacio del tamano del fichero
+		//int vector_fichero_cifrado[] = new int[longitud_fich]; // Vector vacio del tamano del fichero
 		boolean encontrado = false; // Variable para ver si se ha encontrado el
 									// texto
 		/**
@@ -89,30 +89,29 @@ public class eda1ex {
 
 		/*
 		 * Esta parte se utilizara para la barra del porcentaje
-		 */
+		 
 
 		int porcentaje = 0;
 		int cont_porcentaje = 0;
 		System.out.println("|0%                                           100%|");
-		int evil_cifrado[];
+		*/
+
 
 		/*
 		 * Comienza aqui lo interesante
 		 */
 
 		for (int clave = 0; clave < 65536; clave++) { // Bucle que recorra todas las claves
-			if (clave > porcentaje) {
+			/*if (clave > porcentaje) {
 				porcentaje += 1310;
 				System.out.print("|"); // Aumenta la barra de porcentaje
 				cont_porcentaje++;
-			}
-
+			}*/
 			int cont_evil = 0; // Variable que recorrera el vector con el texto
 			int longitud_evil = evil_vector.length; // Longitud del texto que se busca
-			evil_cifrado = ofuscar(evil_vector, clave, vPS, vPI, vPR, longitud_evil);
-			
+			evil_vector = ofuscar(evil_vector, clave, vPS, vPI, vPR, longitud_evil);
 			for (int i = 0; i < (longitud_fich); i++) { // Bucle que recorre todas las posiciones del vector a buscar
-				if (evil_cifrado[cont_evil] == vector_fichero[i]) {
+				if (evil_vector[cont_evil] == vector_fichero[i]) {
 					cont_evil++;
 				} // Comprueba la igualdad entre el texto a buscar y el fichero
 				else {
@@ -121,13 +120,13 @@ public class eda1ex {
 				if (cont_evil == longitud_evil - 1) {
 					
 					int inicio_vector = i - longitud_evil+1;
-
-					System.out.println("\n\n\n La posicion " + (inicio_vector) + "\n\n\n");
-
 					int clave_inicio = ((clave+65536) - inicio_vector-1)%65536; /////////////////aqui
-					fichero_cifrado = ofuscar(vector_fichero, clave_inicio, vPS, vPI, vPR, longitud_fich);
+					while (clave_inicio<0){
+						clave_inicio+=65536;
+					}
+					vector_fichero = ofuscar(vector_fichero, clave_inicio, vPS, vPI, vPR, longitud_fich);
 					
-					for (int j = -100; j < 501; j++) {
+					for (int j = -100; j <= 500; j++) {
 						if (i + j >= 0 && i+j<longitud_fich) {
 							if ((vector_fichero[i + j] == 13) || (vector_fichero[i + j] == 10)) {
 								System.out.print("\n");
@@ -135,24 +134,29 @@ public class eda1ex {
 								System.out.print((char) vector_fichero[i + j]);
 							}
 						}
+						
 						if (j == 500) { // Informa acerca de la ubicacion y
 										// clave
 										// del mensaje
-							System.out.println("\n La clave es " + clave + " en la posicion " + (i - evil_vector.length)
+							System.out.println("\n La clave es " + clave_inicio + " en la posicion " + (inicio_vector)
 									+ "\n-----------------------------------------------------------------------");
+							/*
 							System.out.println("\n|0%                                           100%|");
 							for (int p = 0; p < cont_porcentaje; p++) { 
 								System.out.print("|");
-							}
+							} */
 							cont_evil = 0;
 							encontrado = true;
+							
 						}
+						
 					}
-					fichero_cifrado = ofuscar(fichero_cifrado, clave_inicio, vPS, vPI, vPR, longitud_fich);
+					vector_fichero = ofuscar(vector_fichero, clave_inicio, vPS, vPI, vPR, longitud_fich);
 				}
 			}
-			evil_cifrado = ofuscar(evil_cifrado, clave, vPS, vPI, vPR, longitud_evil); 
+			evil_vector = ofuscar(evil_vector, clave, vPS, vPI, vPR, longitud_evil); 
 		}
+
 		/*
 		 * Informacion acerca del tiempo que ha tardado el programa en comprobar
 		 * todo
@@ -176,7 +180,8 @@ public class eda1ex {
 	public static int[] ofuscar(int[] vector, int clave, int vPS[], int vPI[], int vPR[], int l_fich) {
 		int b;
 		int w0, w1;
-		for (int i = 0; i != l_fich - 1; i++) {
+		try{
+		for (int i = 0; i != (l_fich - 1); i++) {
 			w0 = clave % 256;
 			w1 = clave / 256;
 			b = vector[i];
@@ -189,6 +194,9 @@ public class eda1ex {
 			b = (b - w0 + 256) % 256;
 			vector[i] = b;
 			clave = (clave + 1) % 65536;
+		}
+		} catch (Exception e){
+			System.out.println("LOL_EXCEPTION!");
 		}
 		return vector;
 	}
