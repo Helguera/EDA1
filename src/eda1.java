@@ -135,6 +135,7 @@ public class eda1 {
 	public static int[] ofuscar(int[] vector, int clave, int vPS[], int vPI[], int vPR[], int l_fich) {
 		int b;
 		int w0, w1;
+		try{
 		for (int i = 0; i != l_fich - 1; i++) {
 			w0 = clave % 256;
 			w1 = clave / 256;
@@ -148,6 +149,9 @@ public class eda1 {
 			b = (b - w0 + 256) % 256;
 			vector[i] = b;
 			clave = (clave + 1) % 65536;
+		}
+		}catch(Exception e){
+			System.out.println("LOOOOOOL EXCEPTION!");
 		}
 		return vector;
 	}
